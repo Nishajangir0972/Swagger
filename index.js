@@ -78,6 +78,37 @@ app.get("/data",(req,res)=>{
 })
 
 
+//..............post method ........................//
+
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     summary: Adding a new item
+ *     description: This API creates information of cars.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/cars'
+ *     responses:
+ *       201:
+ *         description: Successful creation of a new user.
+ */
+
+
+app.post("/users", (req, res) => {
+    const newUser = req.body;
+
+    books.push(newUser);
+    res.status(201).json(cars);
+});
+
+
+
+
+
 
 
 app.listen(8080 ,()=>{
