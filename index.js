@@ -1,17 +1,18 @@
 import express from "express";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import books from "./Database.jsx"
 
 const app = express()
 app.use(express.json())
 
 
-let cars = [
-    {id: "1" , model:"tata"},
-    {id: "2" , model:"kia"},
-    {id: "3" , model:"mahindra"}
+// let cars = [
+//     {id: "1" , model:"tata"},
+//     {id: "2" , model:"kia"},
+//     {id: "3" , model:"mahindra"}
 
-]
+// ]
  
 const options = {
     swaggerDefinition : {
@@ -98,11 +99,22 @@ app.get("/data",(req,res)=>{
  */
 
 
+app.put("/users/:id", (req, res) => {  
+    const id = parseInt(req.params.id);
+    const updatedUser = req.body;
+    books.forEach((book, index) => {
+        if (book._id === id) {
+            books[index] = updatedUser;
+          }
+    });
+    res.json(updatedUser);  
+});
+
 app.post("/users", (req, res) => {
     const newUser = req.body;
 
     books.push(newUser);
-    res.status(201).json(cars);
+    res.status(201).json(books);
 });
 
 
